@@ -1,2 +1,2 @@
 # Numerical-base-converter
-A python file with a code to convert number in a base to another
+A python file with a code to convert number from a base to another
