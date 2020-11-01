@@ -1,6 +1,6 @@
 characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ '
 dictionary = {}
-for i in range(95):
+for i in range(len(characters)):
 	dictionary[characters[i]] = str(i)
 	dictionary[str(i)] = characters[i]
 
