@@ -1,39 +1,33 @@
-from string import printable
-printable = printable[:10] + printable[36:62] + printable[10:36] + printable[62:]
-
+characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~ '
 dictionary = {}
 for i in range(95):
-	dictionary[printable[i]] = str(i)
-	dictionary[str(i)] = printable[i]
+	dictionary[characters[i]] = str(i)
+	dictionary[str(i)] = characters[i]
 
-def conv(value):
-	"""value is a string or a list of string"""
+def transformation(value):
+	"""value is a string or a list of string
+	return a list"""
 	global dictionary
 	result = []
 	for i in value:
 		result.append(dictionary[i])
-	return "".join(result)
+	return result
 
-
-def decomp(value, starting_base = 10, arrival_base = 10):
-	"""Convert 'value' written in 'starting_base' in base 'arrival_base' (both by default 10).
+def convert(value, starting_base = 10, arrival_base = 10):
+	"""Convert 'value' written in 'starting_base' in numerical base 'arrival_base' (both 10 by default).
 	Works with numerical base from 2 to 96. Use the string.printable[:95] for the symbols
 	'value' in a string or a list of string
 	'arrival_base' and 'starting_base' are integer"""
 
-	value = conv(value)
 	if starting_base != 10:
-		result = 0
-		if starting_base > 10 or len(value.split(" ")) != 1:
-			a = [int(i) for i in value.split(" ")]
-		else:
-			a = [int(i) for i in value]
+		value = transformation(value)
+		a = [int(i) for i in value]
 		a.reverse()
-		for i in a:
-			ind = a.index(i)
+		result = 0
+		for ind in range(len(a)):
+			i = a[ind]
 			result += i* (starting_base**ind)
-			a[ind] = i-1
-		value = conv(str(result))
+		value = str(result)
 
 	if arrival_base != 10:
 		value = int(value)
@@ -50,5 +44,5 @@ def decomp(value, starting_base = 10, arrival_base = 10):
 			fois = diff//nbr +1
 			value = value - nbr*fois
 			result.append(str(fois))
-		value = conv(result)
+		value = "".join(transformation(result))
 	return value
